@@ -87,6 +87,32 @@
       ctx.lineWidth = 2;
       ctx.stroke();
 
+      for (let i = 0; i < 60; i++) {
+        const angle = (i * Math.PI) / 30 - Math.PI / 2;
+        const isHour = i % 5 === 0;
+        const length = isHour ? 16 : 8;
+        const outer = radius - 12;
+        const inner = radius - 12 - length;
+        ctx.beginPath();
+        ctx.moveTo(centerX + outer * Math.cos(angle), centerY + outer * Math.sin(angle));
+        ctx.lineTo(centerX + inner * Math.cos(angle), centerY + inner * Math.sin(angle));
+        ctx.strokeStyle = isHour ? '#b0c8ff' : '#556688';
+        ctx.lineWidth = isHour ? 3 : 1.5;
+        ctx.stroke();
+      }
+
+      ctx.fillStyle = '#c0d8ff';
+      ctx.font = 'bold 22px "Segoe UI", "Courier New", monospace';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      for (let i = 1; i <= 12; i++) {
+        const angle = (i * Math.PI) / 6 - Math.PI / 2;
+        const numRadius = radius - 36;
+        const x = centerX + numRadius * Math.cos(angle);
+        const y = centerY + numRadius * Math.sin(angle);
+        ctx.fillText(i, x, y);
+      }
+
       const hourAngle = (hours * Math.PI) / 6 + (minutes * Math.PI) / 360 - Math.PI / 2;
       const minuteAngle = (minutes * Math.PI) / 30 - Math.PI / 2;
       const secondAngle = (seconds * Math.PI) / 30 - Math.PI / 2;
